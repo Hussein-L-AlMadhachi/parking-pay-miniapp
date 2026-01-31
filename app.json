@@ -1,0 +1,10 @@
+{
+  "pages": [
+    "pages/index/index"
+  ],
+  "window": {
+    "defaultTitle": "Smart Parking",
+    "enablePullDownRefresh": false,
+    "titleBarColor": "#FFFFFF"
+  }
+}

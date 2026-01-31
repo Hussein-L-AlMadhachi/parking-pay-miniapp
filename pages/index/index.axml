@@ -1,0 +1,75 @@
+<view class="container">
+  
+  <!-- Header -->
+  <view class="header blur-bg">
+    <view class="header-content">
+      <view class="brand">
+        <view class="logo-box">
+          <text class="logo-icon">P</text>
+        </view>
+        <text class="brand-name">SmartPark</text>
+      </view>
+      <view class="status" a:if="{{isAuthenticated}}">
+        <view class="status-dot"></view>
+        <text class="status-text">Connected</text>
+      </view>
+    </view>
+  </view>
+
+  <view class="content">
+    
+    <!-- Login View -->
+    <view class="login-view fade-in" a:if="{{!isAuthenticated}}">
+       <view class="hero-text">
+         <text class="title">Easy Parking</text>
+         <text class="subtitle">Seamlessly pay for your parking spot with just a scan.</text>
+       </view>
+
+       <button class="btn-primary" onTap="authenticate" loading="{{isLoadingLogin}}" disabled="{{isLoadingLogin}}">
+          Sign In to Start
+       </button>
+       <text class="footer-text">Powered by SuperApp Auth</text>
+    </view>
+
+    <!-- Dashboard View -->
+    <view class="dashboard-view fade-in" a:if="{{isAuthenticated}}">
+        
+        <!-- Scan Card -->
+        <view class="card scan-card" onTap="startScan">
+            <view class="card-decor"></view>
+            <view class="icon-circle">
+               <text class="scan-icon">📷</text>
+            </view>
+            <view class="card-text">
+               <text class="card-title">Scan QR Code</text>
+               <text class="card-sub">Locate the code on the meter</text>
+            </view>
+            <button class="btn-secondary">Activate Camera</button>
+        </view>
+
+        <!-- Payment Confirmation -->
+        <view class="payment-section fade-in" a:if="{{showPayment}}" id="payment">
+            <view class="pay-card">
+                <view class="pay-header">
+                   <text class="pay-label">CONFIRM PAYMENT</text>
+                   <text class="pay-title">Parking Spot</text>
+                </view>
+                
+                <view class="spot-display">
+                    <text class="spot-label">ID Code</text>
+                    <text class="spot-value">{{scannedCode}}</text>
+                </view>
+
+                <view class="action-row">
+                    <button class="btn-cancel" onTap="cancelScan">Cancel</button>
+                    <button class="btn-pay" onTap="processPayment" loading="{{isLoadingPay}}" disabled="{{isLoadingPay}}">
+                       Pay Now
+                    </button>
+                </view>
+            </view>
+        </view>
+
+    </view>
+
+  </view>
+</view>
